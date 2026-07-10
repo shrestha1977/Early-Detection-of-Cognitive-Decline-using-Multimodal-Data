@@ -14,6 +14,6 @@ Using dataset-driven normalization, Composite Cognitive Score (CCS) generation, 
 * Age-adjusted cognitive evaluation
 * Machine learning–based risk classification
 * Interactive Streamlit web interface
-* Research-oriented cognitive performance reporting
+
 
 **Tech Stack:** Python, Streamlit, Pandas, Scikit-learn, Joblib, OpenPyXL
