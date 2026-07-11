@@ -92,7 +92,7 @@ def generate_math_questions(num=QUESTION_POOL_SIZE):
 
 def run_math_test():
 
-    st.title("Numerical Ability Cognitive Test")
+    st.title("Numerical Ability Test")
 
     # ---------- SESSION INITIALIZATION ----------
 
