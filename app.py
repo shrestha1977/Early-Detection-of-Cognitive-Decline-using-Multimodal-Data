@@ -370,93 +370,124 @@ elif st.session_state.current_stage == "final":
         st.title("🧠 Cognitive Assessment Report")
     
         st.markdown("""
-        Thank you for completing the assessment.
+        Your performance was evaluated across multiple cognitive domains using:
 
-        Your performance was analyzed using:
+        ✅ Numerical Ability Test
 
-        - Numerical Ability Test
-        - Stroop Cognitive Control Test
-        - Mental Rotation Task
+        ✅ Stroop Test
+
+        ✅ Mental Rotation Test
 
         The results from all three assessments were combined and compared against age-adjusted cognitive performance benchmarks.
 
-        ### Assessment Result
+       
         """)
 
-        st.metric(
-            "Risk Probability",
-            f"{probability*100:.1f}%"
-        )
+        st.markdown("---")
+
+        st.subheader("🎯 Final Assessment Outcome")
 
         if risk == "Green":
-            st.success("🟢 GREEN\n\nLow Risk")
+            st.success("🟢 GREEN ZONE")
             st.markdown("""
         ### Interpretation
 
-        Your performance across the cognitive tasks was within the expected range for your age group.
 
-        The assessment did not identify any notable indicators of cognitive difficulty based on the measures evaluated.
+Your assessment results indicate that cognitive performance was generally within the expected range for your age group.
 
-        ### What This Means
+Performance across the evaluated domains was consistent with typical cognitive functioning patterns.
 
-        - Attention and inhibitory control appear stable.
-        - Processing speed is within the expected range.
-        - Numerical reasoning performance was adequate.
-        - Spatial reasoning performance was within normal limits.
+### What this means
 
-        ### Recommendation
+• Attention and cognitive control were generally stable.
 
-        Continue engaging in mentally stimulating activities, regular physical exercise, healthy sleep habits, and social interaction to support long-term cognitive health.
+• Processing speed was within the expected range.
 
-        **This result should not be considered a medical diagnosis.**
+• Numerical reasoning and spatial reasoning performance were adequate.
+
+• Overall cognitive performance appeared consistent with expected levels.
+
+### Recommendations
+
+• Continue engaging in mentally stimulating activities.
+
+• Maintain healthy sleep habits.
+
+• Stay physically active.
+
+• Support cognitive wellness through regular learning and problem solving.
         """)
 
 
+
         elif risk == "Yellow":
-            st.warning("🟡 YELLOW\n\nModerate Risk")
+            st.warning("🟡 YELLOW ZONE")
             st.markdown("""
         ### Interpretation
 
         Your assessment results indicate mild deviations from expected cognitive performance levels.
 
-        This does not necessarily indicate impairment, but some aspects of attention, processing speed, or reasoning may have been lower than expected during testing.
+While this does not necessarily indicate impairment, certain aspects of cognitive performance were lower than expected during testing.
 
-        ### What This Means
+### What this means
 
-        - Certain cognitive measures were below the average range.
-        - Temporary factors such as fatigue, stress, distraction, or lack of sleep may influence performance.
-        - Additional monitoring may be beneficial.
+• Some cognitive measures showed variability.
 
-        ### Recommendation
+• Temporary factors such as fatigue, stress, distraction, or poor sleep may have influenced performance.
 
-        Consider maintaining healthy sleep habits, stress management practices, physical activity, and regular cognitive engagement.
+• Continued monitoring and cognitive engagement may be beneficial.
 
-        If concerns persist, a professional cognitive evaluation may be considered.
+### Recommendations
 
-        **This result should not be considered a medical diagnosis.**
+• Maintain healthy sleep patterns.
+
+• Reduce stress wherever possible.
+
+• Stay physically active.
+
+• Engage regularly in activities that stimulate reasoning, attention and memory.
+
+• Consider repeating the assessment periodically.
         """)
 
+
         else:
-            st.error("🔴 RED\n\nHigh Risk")
+            st.error("🔴 RED ZONE")
             st.markdown("""
         ### Interpretation
 
-        Your assessment results showed notable deviations from expected cognitive performance levels.
+Your assessment results showed notable deviations from expected cognitive performance levels.
 
-        Performance across one or more cognitive domains was substantially lower than the age-adjusted benchmark used in this assessment.
+One or more cognitive domains demonstrated performance below the age-adjusted benchmark used within this assessment framework.
 
-        ### What This Means
+### What this means
 
-        - Reduced performance was observed in one or more cognitive domains.
-        - The result may indicate a need for further evaluation.
-        - Temporary factors such as illness, fatigue, stress, or distraction can also affect performance.
+• Reduced performance was observed in one or more cognitive domains.
 
-        ### Recommendation
+• Performance may have been influenced by fatigue, illness, stress, or other external factors.
 
-        Consider discussing these results with a qualified healthcare or neuropsychology professional if you have ongoing concerns regarding memory, attention, reasoning, or cognitive functioning.
+• Further monitoring or evaluation may be beneficial.
 
-        **This result should not be considered a medical diagnosis and should only be interpreted as a screening indicator.**
+### Recommendations
+
+• Continue engaging in cognitively stimulating activities.
+
+• Maintain healthy sleep and exercise habits.
+
+• Monitor memory, attention and reasoning performance over time.
+
+• If concerns persist, consider consultation with a qualified healthcare or neuropsychology professional.
         """)
+            
+            st.markdown("---")
+
+            st.info("""
+**Important Notice**
+
+This assessment is intended for academic research and cognitive screening purposes only.
+
+It is not a diagnostic instrument and should not be considered a substitute for professional medical or neuropsychological evaluation.
+""")
 
     show_final_result()
 
