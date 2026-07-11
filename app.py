@@ -197,7 +197,7 @@ elif st.session_state.current_stage == "instructions":
     ### 🧠 Tasks Included
     1. **Numerical Ability Test**
     2. **Stroop Test**
-    3. **Mental Rotation Task**
+    3. **Mental Rotation Test**
 
     ---
 
