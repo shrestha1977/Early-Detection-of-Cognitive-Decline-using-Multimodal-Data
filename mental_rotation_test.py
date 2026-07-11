@@ -58,7 +58,7 @@ def handle_answer(option):
 
 def run_mental_rotation_test():
 
-    st.title("🧠 Mental Rotation Task")
+    st.title("🧠 Mental Rotation Test")
 
     # ---------------- SESSION ----------------
 
