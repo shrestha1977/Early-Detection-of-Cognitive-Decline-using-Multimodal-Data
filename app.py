@@ -358,7 +358,7 @@ elif st.session_state.current_stage == "final":
     # Classification
     # -----------------------
 
-        risk, probability = classify(z)
+        risk = classify(z)
 
 
     # -----------------------
@@ -481,7 +481,7 @@ One or more cognitive domains demonstrated performance below the age-adjusted be
             
             st.markdown("---")
 
-            st.info("""
+        st.info("""
 **Important Notice**
 
 This assessment is intended for academic research and cognitive screening purposes only.
