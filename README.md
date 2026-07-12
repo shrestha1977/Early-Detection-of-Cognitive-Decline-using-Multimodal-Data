@@ -16,4 +16,3 @@ Using dataset-driven normalization, Composite Cognitive Score (CCS) generation, 
 * Interactive Streamlit web interface
 
 
-**Tech Stack:** Python, Streamlit, Pandas, Scikit-learn, Joblib, OpenPyXL
