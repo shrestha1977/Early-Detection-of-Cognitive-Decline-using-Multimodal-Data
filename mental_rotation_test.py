@@ -2,9 +2,6 @@ import streamlit as st
 import random
 import time
 
-# ---------------------------
-# CONFIGURATION
-# ---------------------------
 
 image_sets = [
     ("images/target1.png", "images/correct1.png", "images/wrong1.png", 45),
@@ -28,10 +25,6 @@ TOTAL_QUESTIONS = 15
 QUESTION_TIME_LIMIT = 15
 
 
-# ---------------------------
-# ANSWER HANDLER
-# ---------------------------
-
 def handle_answer(option):
 
     rt = time.time() - st.session_state.mrt_question_start
@@ -52,20 +45,14 @@ def handle_answer(option):
     st.rerun()
 
 
-# ---------------------------
-# MAIN ENGINE
-# ---------------------------
-
 def run_mental_rotation_test():
 
     st.title("🧠 Mental Rotation Test")
 
-    # ---------------- SESSION ----------------
 
     if "mrt_started" not in st.session_state:
         st.session_state.mrt_started = False
 
-    # ---------------- INSTRUCTIONS ----------------
 
     if not st.session_state.mrt_started:
 
@@ -148,7 +135,6 @@ You will see a reference image and two options.
 
         return
 
-    # ---------------- INITIALIZE ----------------
 
     if "mrt_initialized" not in st.session_state:
 
@@ -172,7 +158,6 @@ You will see a reference image and two options.
 
         st.session_state.current_angle = 0
 
-    # ---------------- TEST COMPLETE ----------------
 
     if st.session_state.mrt_question >= TOTAL_QUESTIONS:
 
@@ -220,15 +205,11 @@ You will see a reference image and two options.
 
         )
 
-            # ---------- COMPLETION ----------
 
     if st.session_state.mrt_question >= TOTAL_QUESTIONS:
 
         results = st.session_state.mrt_results
 
-        # -----------------------------
-        # Basic Performance Metrics
-        # -----------------------------
 
         correct = sum(r["correct"] for r in results)
 
@@ -238,9 +219,6 @@ You will see a reference image and two options.
 
         timed_out = sum(r["timed_out"] for r in results)
 
-        # -----------------------------
-        # High Angle Accuracy
-        # -----------------------------
 
         high_angle_trials = [
             r for r in results
@@ -255,9 +233,6 @@ You will see a reference image and two options.
         else:
             high_angle_acc = 0
 
-        # -----------------------------
-        # Spatial Ability Score
-        # -----------------------------
 
         weighted_score = 0
         total_weight = 0
@@ -276,9 +251,6 @@ You will see a reference image and two options.
             if total_weight > 0 else 0
         )
 
-        # -----------------------------
-        # Store RAW values only
-        # -----------------------------
 
         st.session_state["MR_acc"] = accuracy
 
@@ -290,9 +262,6 @@ You will see a reference image and two options.
 
         st.session_state["MR_spatial_score"] = spatial_score
 
-        # -----------------------------
-        # UI
-        # -----------------------------
 
         st.subheader("📊 Performance Metrics")
 
@@ -355,7 +324,7 @@ You will see a reference image and two options.
             st.rerun()
 
         return
-        # ---------- QUESTION TIMER ----------
+        
 
     if st.session_state.mrt_question_start is None:
         st.session_state.mrt_question_start = time.time()
@@ -367,8 +336,7 @@ You will see a reference image and two options.
         QUESTION_TIME_LIMIT - elapsed
     )
 
-    # ---------- AUTO TIMEOUT ----------
-
+    
     if remaining <= 0:
 
         st.session_state.mrt_results.append({
@@ -387,7 +355,7 @@ You will see a reference image and two options.
 
         return
 
-    # ---------- QUESTION UI ----------
+   
 
     st.markdown(
         f"### Question {st.session_state.mrt_question + 1} / {TOTAL_QUESTIONS}"
@@ -408,7 +376,7 @@ You will see a reference image and two options.
         text=f"⏳ {remaining:.1f}s left"
     )
 
-    # ---------- CURRENT QUESTION ----------
+    
 
     trial_idx = st.session_state.mrt_randomized[
         st.session_state.mrt_question
@@ -418,7 +386,7 @@ You will see a reference image and two options.
 
     st.session_state.current_angle = angle
 
-    # ---------- RANDOMIZE OPTIONS ----------
+    
 
     if st.session_state.mrt_options is None:
 
@@ -441,7 +409,6 @@ You will see a reference image and two options.
 
         options = st.session_state.mrt_options
 
-    # ---------- DISPLAY TARGET ----------
 
     st.markdown("---")
 
@@ -459,7 +426,7 @@ You will see a reference image and two options.
         "### 👆 Select the Correct Rotated Image"
     )
 
-    # ---------- OPTIONS ----------
+   
 
     colA, colB = st.columns(2)
 
@@ -491,7 +458,7 @@ You will see a reference image and two options.
 
             handle_answer(options[1])
 
-    # ---------- AUTO REFRESH ----------
+    
 
     if st.session_state.mrt_question < TOTAL_QUESTIONS:
 
