@@ -12,17 +12,11 @@ from calculate_ccs import calculate_ccs
 from expected_score import expected_score
 from age_adjust import age_adjusted_score
 
-# ==========================================
-# LOAD DATASET
-# ==========================================
 
 DATASET_PATH = "dataset/all_data.xlsx"
 
 df = pd.read_excel(DATASET_PATH)
 
-# ==========================================
-# AGE MAPPING
-# ==========================================
 
 age_map = {
     "18-25": 22,
@@ -34,9 +28,6 @@ age_map = {
 
 df["Age"] = df["Age"].replace(age_map)
 
-# ==========================================
-# COMPUTE AGE ADJUSTED SCORES
-# ==========================================
 
 age_adjusted_scores = []
 
@@ -76,9 +67,6 @@ for _, row in df.iterrows():
 
     age_adjusted_scores.append(adj)
 
-# ==========================================
-# COMPUTE STATISTICS
-# ==========================================
 
 z_statistics = {
 
@@ -88,9 +76,6 @@ z_statistics = {
 
 }
 
-# ==========================================
-# SAVE
-# ==========================================
 
 output = os.path.join(
     os.path.dirname(__file__),
