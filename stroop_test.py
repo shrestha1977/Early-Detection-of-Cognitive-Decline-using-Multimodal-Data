@@ -17,8 +17,6 @@ COLORS = {
 NEUTRAL_WORDS = ["DOG", "CAR", "TREE", "HOUSE"]
 
 
-# ================= QUESTION ENGINE =================
-
 def generate_question():
 
     q_type = random.choice(["congruent", "incongruent", "neutral"])
@@ -73,13 +71,11 @@ def next_question():
     ) = generate_question()
 
 
-# ================= MAIN ENGINE =================
 
 def run_stroop_test():
 
     st.title("🧠 Stroop Test")
 
-    # ---------- SESSION INITIALIZATION ----------
 
     if "stroop_started" not in st.session_state:
         st.session_state.stroop_started = False
@@ -93,7 +89,7 @@ def run_stroop_test():
     if "answered" not in st.session_state:
         st.session_state.answered = False
 
-    # ---------- START SCREEN ----------
+    
 
     if not st.session_state.stroop_started:
 
@@ -145,7 +141,6 @@ Click below when you are ready.
 
         return
 
-    # ---------- TEST COMPLETED ----------
 
     if st.session_state.q_index > TOTAL_QUESTIONS:
 
@@ -187,9 +182,6 @@ Click below when you are ready.
         if pd.notna(cong_rt) and pd.notna(incong_rt):
             stroop_effect = incong_rt - cong_rt
 
-                # -------------------------------------------------
-        # STORE RAW METRICS FOR FINAL ML PIPELINE
-        # -------------------------------------------------
 
         st.session_state["Stroop_error"] = error_rate
 
@@ -201,9 +193,6 @@ Click below when you are ready.
             stroop_effect if stroop_effect is not None else 0
         )
 
-        # -------------------------------------------------
-        # PERFORMANCE METRICS
-        # -------------------------------------------------
 
         st.subheader("📊 Performance Metrics")
 
@@ -262,9 +251,6 @@ Click below when you are ready.
 
         return
 
-    # -------------------------------------------------
-    # TIMER
-    # -------------------------------------------------
 
     st_autorefresh(
         interval=1000,
@@ -286,9 +272,6 @@ Click below when you are ready.
         f"⏱ Time left: {remaining} seconds"
     )
 
-    # -------------------------------------------------
-    # DISPLAY WORD
-    # -------------------------------------------------
 
     st.markdown(
         f"""
@@ -300,9 +283,6 @@ Click below when you are ready.
         unsafe_allow_html=True
     )
 
-    # -------------------------------------------------
-    # ANSWER BUTTONS
-    # -------------------------------------------------
 
     cols = st.columns(4)
 
@@ -351,9 +331,6 @@ Click below when you are ready.
 
                 st.rerun()
 
-    # -------------------------------------------------
-    # AUTO TIMEOUT
-    # -------------------------------------------------
 
     if remaining == 0 and not st.session_state.answered:
 
