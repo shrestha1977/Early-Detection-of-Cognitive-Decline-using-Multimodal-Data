@@ -3,10 +3,6 @@ import os
 import pandas as pd
 
 
-# =====================================
-# LOAD TRAINED REGRESSION MODEL
-# =====================================
-
 model_path = os.path.join(
     os.path.dirname(__file__),
     "regression_model.pkl"
@@ -16,10 +12,6 @@ with open(model_path, "rb") as f:
     regression_model = pickle.load(f)
 
 
-# =====================================
-# AGE MAPPING
-# =====================================
-
 AGE_MAPPING = {
     "18-25": 22,
     "26-35": 30,
@@ -28,10 +20,6 @@ AGE_MAPPING = {
     "56+": 60
 }
 
-
-# =====================================
-# PREDICT EXPECTED SCORE
-# =====================================
 
 def expected_score(age):
 
