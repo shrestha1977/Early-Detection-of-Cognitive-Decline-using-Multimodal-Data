@@ -6,15 +6,11 @@ TEST_DURATION = 300
 QUESTION_POOL_SIZE = 100
 
 
-# ================= ENGINE INITIALIZER =================
-
 def safe_elapsed(start_time):
     if start_time is None:
         return 0
     return max(0, time.time() - start_time)
 
-
-# ================= QUESTION GENERATOR =================
 
 def generate_math_questions(num=QUESTION_POOL_SIZE):
     questions = []
@@ -88,13 +84,9 @@ def generate_math_questions(num=QUESTION_POOL_SIZE):
     return questions
 
 
-# ================= MAIN TEST ENGINE =================
-
 def run_math_test():
 
     st.title("Numerical Ability Test")
-
-    # ---------- SESSION INITIALIZATION ----------
 
     if "test_started" not in st.session_state:
         st.session_state.test_started = False
@@ -124,9 +116,6 @@ def run_math_test():
             "high_correct": 0,
         }
 
-    # ---------- START SCREEN ----------
-
-        # ---------- START SCREEN ----------
 
     if not st.session_state.test_started:
 
@@ -164,7 +153,6 @@ def run_math_test():
 
         return
 
-    # ---------- TIMER ----------
 
     elapsed = safe_elapsed(st.session_state.start_time)
     remaining = int(TEST_DURATION - elapsed)
@@ -174,7 +162,6 @@ def run_math_test():
 
     st.metric("⏳ Time Remaining", f"{mins:02d}:{secs:02d}")
 
-    # ---------- TIME UP ----------
 
     if remaining <= 0:
 
@@ -227,10 +214,6 @@ def run_math_test():
             st.rerun()
 
         return
-
-    # ---------- QUESTION DISPLAY ----------
-
-        # ---------- QUESTION DISPLAY ----------
 
     message_placeholder = st.empty()
 
