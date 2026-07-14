@@ -1,10 +1,6 @@
 import pickle
 import os
 
-# ===========================
-# LOAD STATISTICS
-# ===========================
-
 stats_file = os.path.join(
     os.path.dirname(__file__),
     "statistics.pkl"
@@ -14,10 +10,6 @@ with open(stats_file, "rb") as f:
     stats = pickle.load(f)
 
 
-# ===========================
-# BASIC Z-SCORE
-# ===========================
-
 def z_score(value, mean, std):
 
     if std == 0:
@@ -25,10 +17,6 @@ def z_score(value, mean, std):
 
     return (value - mean) / std
 
-
-# ===========================
-# NUMERICAL ABILITY NORMALIZATION
-# ===========================
 
 def normalize_math(num_ability_score):
 
@@ -38,10 +26,6 @@ def normalize_math(num_ability_score):
         stats["math_std"]
     )
 
-
-# ===========================
-# STROOP NORMALIZATION
-# ===========================
 
 def normalize_stroop(
     Stroop_error,
@@ -70,17 +54,12 @@ def normalize_stroop(
         stats["Stroop_interference_std"]
     )
 
-    # Equal weighting
     return (
         error_z +
         rt_z +
         interference_z
     ) / 3
 
-
-# ===========================
-# MENTAL ROTATION NORMALIZATION
-# ===========================
 
 def normalize_mrt(
     MR_acc,
@@ -117,7 +96,6 @@ def normalize_mrt(
         stats["MR_high_angle_accuracy_std"]
     )
 
-    # Equal weighting
     return (
         acc_z +
         reaction_z +
