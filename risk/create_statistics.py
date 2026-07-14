@@ -2,17 +2,9 @@ import pandas as pd
 import pickle
 import os
 
-# ==============================
-# LOAD DATASET
-# ==============================
-
 DATASET_PATH = "dataset/all_data.xlsx"
 
 df = pd.read_excel(DATASET_PATH)
-
-# ==============================
-# REQUIRED COLUMNS
-# ==============================
 
 required_columns = [
     "num_ability_score",
@@ -29,9 +21,6 @@ for col in required_columns:
     if col not in df.columns:
         raise ValueError(f"Column '{col}' not found in dataset.")
 
-# ==============================
-# CALCULATE STATISTICS
-# ==============================
 
 statistics = {
     "math_mean": df["num_ability_score"].mean(),
@@ -59,9 +48,6 @@ statistics = {
     "MR_high_angle_accuracy_std": df["MR_high_angle_accuracy"].std()
 }
 
-# ==============================
-# SAVE STATISTICS
-# ==============================
 
 output_file = os.path.join(
     os.path.dirname(__file__),
