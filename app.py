@@ -1,6 +1,7 @@
 import streamlit as st
 import time
 
+from datetime import datetime
 from math_test import run_math_test
 from stroop_test import run_stroop_test
 from mental_rotation_test import run_mental_rotation_test
@@ -247,13 +248,7 @@ elif st.session_state.current_stage == "mental":
 
 elif st.session_state.current_stage == "final":
 
-    st.title("Thank You for Participating!")
-
-    st.markdown("""
-    Your participation is greatly appreciated.
-
-    This data will be used strictly for academic purposes.
-    """)
+    
 
     from risk.normalize import (
     normalize_math,
@@ -364,28 +359,48 @@ elif st.session_state.current_stage == "final":
     # -----------------------
     # Display
     # -----------------------
-
-        
+        participant = st.session_state["demographics"]
+        current_time = datetime.now()
 
         st.title("🧠 Cognitive Assessment Report")
-    
-        st.markdown("""
-        Your performance was evaluated across multiple cognitive domains using:
-
-        ✅ Numerical Ability Test
-
-        ✅ Stroop Test
-
-        ✅ Mental Rotation Test
-
-        The results from all three assessments were combined and compared against age-adjusted cognitive performance benchmarks.
-
-       
-        """)
 
         st.markdown("---")
 
-        st.subheader("🎯 Final Assessment Outcome")
+        st.subheader("👤 Participant Information")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.write(f"**Name:** {participant['name']}")
+            st.write(f"**Gender:** {participant['gender']}")
+            st.write(f"**Age Group:** {participant['age']}")
+
+        with col2:
+            st.write(
+                f"**Assessment Date:** {current_time.strftime('%d %B %Y')}"
+            )
+
+            st.write(
+                f"**Assessment Time:** {current_time.strftime('%I:%M %p')}"
+            )
+
+            st.write("**Assessment Status:** Completed")
+
+        st.markdown("---")
+        
+
+        st.subheader("📋 Assessment Summary")
+
+        st.success("✅ Numerical Ability Test Completed")
+
+        st.success("✅ Stroop Test Completed")
+
+        st.success("✅ Mental Rotation Test Completed")
+        st.markdown("""
+        The results from all three assessments were combined and compared against age-adjusted cognitive performance benchmarks.
+        """)
+
+        st.subheader("Cognitive Risk Zone Classification")
 
         if risk == "Green":
             st.success("🟢 GREEN ZONE")
@@ -397,7 +412,7 @@ Your assessment results indicate that cognitive performance was generally within
 
 Performance across the evaluated domains was consistent with typical cognitive functioning patterns.
 
-### What this means
+### Key Findings
 
 • Attention and cognitive control were generally stable.
 
@@ -425,11 +440,11 @@ Performance across the evaluated domains was consistent with typical cognitive f
             st.markdown("""
         ### Interpretation
 
-        Your assessment results indicate mild deviations from expected cognitive performance levels.
+Your assessment results indicate mild deviations from expected cognitive performance levels.
 
 While this does not necessarily indicate impairment, certain aspects of cognitive performance were lower than expected during testing.
 
-### What this means
+### Key Findings
 
 • Some cognitive measures showed variability.
 
@@ -460,7 +475,7 @@ Your assessment results showed notable deviations from expected cognitive perfor
 
 One or more cognitive domains demonstrated performance below the age-adjusted benchmark used within this assessment framework.
 
-### What this means
+### Key Findings
 
 • Reduced performance was observed in one or more cognitive domains.
 
@@ -482,7 +497,7 @@ One or more cognitive domains demonstrated performance below the age-adjusted be
             st.markdown("---")
 
         st.info("""
-**Important Notice**
+**Assessment Disclaimer**
 
 This assessment is intended for academic research and cognitive screening purposes only.
 
@@ -491,4 +506,4 @@ It is not a diagnostic instrument and should not be considered a substitute for 
 
     show_final_result()
 
-    st.success("Assessment Completed Successfully.")
+    st.success("Thank You for Participating!")
