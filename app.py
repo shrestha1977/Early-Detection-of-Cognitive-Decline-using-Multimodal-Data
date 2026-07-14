@@ -9,10 +9,6 @@ from mental_rotation_test import run_mental_rotation_test
 st.set_page_config(page_title="Cognitive Assessment Tool", layout="centered")
 
 
-# =====================================================
-# CLOUD SAFE SESSION INITIALIZATION
-# =====================================================
-
 if "current_stage" not in st.session_state:
     st.session_state.current_stage = "consent"
 
@@ -22,10 +18,6 @@ if "stage_lock" not in st.session_state:
 if "heartbeat" not in st.session_state:
     st.session_state.heartbeat = time.time()
 
-
-# =====================================================
-# CONSENT PAGE
-# =====================================================
 
 if st.session_state.current_stage == "consent":
 
@@ -58,9 +50,6 @@ if st.session_state.current_stage == "consent":
         st.warning("Please confirm all the above statements to continue.")
 
 
-# =====================================================
-# DEMOGRAPHICS PAGE
-# =====================================================
 
 if st.session_state.current_stage == "demographics":
 
@@ -184,10 +173,6 @@ if st.session_state.current_stage == "demographics":
         st.rerun()
 
 
-# =====================================================
-# INSTRUCTION SCREEN
-# =====================================================
-
 elif st.session_state.current_stage == "instructions":
 
     st.title("Instructions")
@@ -228,10 +213,6 @@ elif st.session_state.current_stage == "instructions":
         st.rerun()
 
 
-# =====================================================
-# TEST ROUTER
-# =====================================================
-
 elif st.session_state.current_stage == "math":
     run_math_test()
 
@@ -242,9 +223,6 @@ elif st.session_state.current_stage == "mental":
     run_mental_rotation_test()
 
 
-# =====================================================
-# FINAL SCREEN
-# =====================================================
 
 elif st.session_state.current_stage == "final":
 
@@ -277,9 +255,6 @@ elif st.session_state.current_stage == "final":
 
         age = age_map[age_group]
 
-    # -----------------------
-    # Raw scores from tests
-    # -----------------------
 
         math_score = st.session_state["num_ability_score"]
 
@@ -294,9 +269,6 @@ elif st.session_state.current_stage == "final":
         mr_high_angle_accuracy = st.session_state["MR_high_angle_accuracy"]
 
 
-    # -----------------------
-    # Normalize
-    # -----------------------
 
         math_norm = normalize_math(math_score)
 
@@ -314,9 +286,6 @@ elif st.session_state.current_stage == "final":
         )
 
 
-    # -----------------------
-    # CCS
-    # -----------------------
 
         ccs = calculate_ccs(
             math_norm,
@@ -325,16 +294,9 @@ elif st.session_state.current_stage == "final":
         )
 
 
-    # -----------------------
-    # Linear Regression
-    # -----------------------
 
         expected = expected_score(age)
 
-
-    # -----------------------
-    # Age Adjustment
-    # -----------------------
 
         age_adjusted = age_adjusted_score(
             ccs,
@@ -342,23 +304,12 @@ elif st.session_state.current_stage == "final":
         )
 
 
-    # -----------------------
-    # Z Score
-    # -----------------------
-
         z = calculate_z(age_adjusted)
 
-
-    # -----------------------
-    # Classification
-    # -----------------------
 
         risk = classify(z)
 
 
-    # -----------------------
-    # Display
-    # -----------------------
         participant = st.session_state["demographics"]
         current_time = datetime.now()
 
