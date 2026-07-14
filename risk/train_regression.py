@@ -12,19 +12,9 @@ from normalize import (
 
 from calculate_ccs import calculate_ccs
 
-
-# =====================================
-# LOAD DATASET
-# =====================================
-
 DATASET_PATH = "dataset/all_data.xlsx"
 
 df = pd.read_excel(DATASET_PATH)
-
-
-# =====================================
-# AGE MAPPING
-# =====================================
 
 age_map = {
     "18-25": 22,
@@ -36,10 +26,6 @@ age_map = {
 
 df["Age"] = df["Age"].replace(age_map)
 
-
-# =====================================
-# COMPUTE Z SCORES
-# =====================================
 
 math_z = []
 stroop_z = []
@@ -74,10 +60,6 @@ df["stroop_z"] = stroop_z
 df["mrt_z"] = mrt_z
 
 
-# =====================================
-# COMPUTE CCS
-# =====================================
-
 df["CCS"] = df.apply(
     lambda x: calculate_ccs(
         x["math_z"],
@@ -88,10 +70,6 @@ df["CCS"] = df.apply(
 )
 
 
-# =====================================
-# TRAIN LINEAR REGRESSION
-# =====================================
-
 X = df[["Age"]]
 
 y = df["CCS"]
@@ -100,10 +78,6 @@ model = LinearRegression()
 
 model.fit(X, y)
 
-
-# =====================================
-# SAVE MODEL
-# =====================================
 
 output = os.path.join(
     os.path.dirname(__file__),
